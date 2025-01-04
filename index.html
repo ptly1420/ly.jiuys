@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九嶷山旅游 - 探索湖南名山</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e60012;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 40px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #e60012;
+        }
+
+        .slider-container {
+            max-width: 1440px;
+            width: 100%;
+            margin: 80px auto 0;
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 50%;
+        }
+
+        .slide-content h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+
+        .slider-nav-item {
+            width: 14px;
+            height: 14px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin: 0 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .slider-nav-item.active {
+            background-color: #e60012;
+        }
+
+        section {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 60px;
+            color: #e60012;
+            font-size: 36px;
+        }
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .destination-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .destination-card h3 {
+            padding: 25px;
+            font-size: 22px;
+            color: #333;
+        }
+
+        .review-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .review {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            width: calc(33.333% - 30px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .review h4 {
+            color: #e60012;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .about-us {
+            background-color: #f9f9f9;
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+            padding-right: 60px;
+        }
+
+        .about-text h2 {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .about-text ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .about-text li {
+            margin-bottom: 10px;
+        }
+
+        .about-image {
+            flex: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 60px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin-right: 60px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 25px;
+            color: #e60012;
+            font-size: 22px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #e60012;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #555;
+        }
+
+        @media (max-width: 1460px) {
+            .slider-container {
+                max-width: 100%;
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 40px;
+            }
+            .destination-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            .destination-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+            nav ul {
+                margin-top: 20px;
+            }
+            nav ul li {
+                margin: 0 15px;
+            }
+            .slide-content h2 {
+                font-size: 24px;
+            }
+            .review {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .destination-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">小勇哥九嶷山旅游</div>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#destinations">景点介绍</a></li>
+                    <li><a href="#reviews">游客评价</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slide">
+                        <img src="./3f.jpeg" alt="九嶷山风景1">
+                        <div class="slide-content">
+                            <h2>九嶷山美景</h2>
+                            <p>探索湖南名山，感受自然的鬼斧神工</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="./c1.jpeg" alt="九嶷山舜帝陵">
+                        <div class="slide-content">
+                            <h2>文化胜地</h2>
+                            <p>领略舜帝文化，体验湖湘文明的独特魅力</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="./73e.jpeg" alt="九嶷山风景3">
+                        <div class="slide-content">
+                            <h2>户外天堂</h2>
+                            <p>徒步、攀岩、观星，尽享户外活动的乐趣</p>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+                <div class="slider-nav">
+                    <div class="slider-nav-item active"></div>
+                    <div class="slider-nav-item"></div>
+                    <div class="slider-nav-item"></div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section id="destinations">
+            <div class="container">
+                <h2>景点介绍</h2>
+                <div class="destination-grid">
+                    <div class="destination-card">
+                        <img src="./3f.jpeg" alt="舜帝陵">
+                        <h3>舜帝陵</h3>
+                    </div>
+                    <div class="destination-card">
+                        <img src="./c1.jpeg" alt="九嶷山大峡谷">
+                        <h3>九嶷山大峡谷</h3>
+                    </div>
+                    <div class="destination-card">
+                        <img src="./3f.jpeg" alt="仙子崖">
+                        <h3>仙子崖</h3>
+                    </div>
+                    <div class="destination-card">
+                        <img src="./3f.jpeg" alt="九嶷山瀑布">
+                        <h3>九嶷山瀑布</h3>
+                    </div>
+                    <div class="destination-card">
+                        <img src="./3f.jpeg" alt="苍龙岭">
+                        <h3>苍龙岭</h3>
+                    </div>
+                    <div class="destination-card">
+                        <img src="./3f.jpeg" alt="九嶷山天池">
+                        <h3>九嶷山天池</h3>
+                    </div>
+                    <div class="destination-card">
+                        <img src="./3f.jpeg" alt="舜源湖">
+                        <h3>舜源湖</h3>
+                    </div>
+                    <div class="destination-card">
+                        <img src="./ly.jpg" alt="九嶷山森林公园">
+                        <h3>九嶷山森林公园</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews">
+            <div class="container">
+                <h2>游客评价</h2>
+                <div class="review-container">
+                    <div class="review">
+                        <h4>张先生</h4>
+                        <p>九嶷山的自然风光让人叹为观止，舜帝陵的历史文化底蕴深厚。导游的讲解非常专业，让我对湖湘文化有了更深入的了解。</p>
+                    </div>
+                    <div class="review">
+                        <h4>李女士</h4>
+                        <p>九嶷山大峡谷的景色壮观秀丽，让人流连忘返。这次旅行不仅欣赏了美景，还体验了当地的特色美食，真是不虚此行！</p>
+                    </div>
+                    <div class="review">
+                        <h4>王先生</h4>
+                        <p>仙子崖的日出景象令人难忘，九嶷山的户外活动丰富多彩。整个旅程安排得很合理，让我们在短时间内领略了九嶷山的魅力。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-us">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>关于我们</h2>
+                        <p>九嶷山旅游网成立于2010年，是九嶷山景区官方认证的在线旅游服务提供商。我们致力于为国内外游客提供高质量、多样化的九嶷山旅游产品和服务，让每一位游客都能深入体验九嶷山的自然之美和文化魅力。</p>
+                       
+                                               <p>我们的使命是"传播九嶷文化，让旅行更有意义"。通过创新的技术和优质的服务，我们努力为游客创造难忘的旅行体验，同时促进九嶷山旅游业的可持续发展。</p>
+                        <p>我们的团队由经验丰富的旅游专家、当地向导和客户服务人员组成。我们深入了解九嶷山的自然和文化资源，与景区管理部门、当地酒店和交通运营商建立了长期稳定的合作关系，确保为游客提供最优质、最可靠的旅游产品。</p>
+                        <p>选择九嶷山旅游网，您将享受到：</p>
+                        <ul>
+                            <li>丰富多样的九嶷山旅游路线，覆盖所有主要景点</li>
+                            <li>专业的导游服务，深入讲解九嶷山的历史文化</li>
+                            <li>灵活的定制服务，满足您的个性化需求</li>
+                            <li>24/7全天候客户支持，确保您的旅行无忧无虑</li>
+                        </ul>
+                        <p>让我们一起探索九嶷山的美丽，感受湖湘文化的魅力，创造难忘的旅行回忆！</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="./3f.jpeg" alt="九嶷山全景">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#destinations">景点介绍</a></li>
+                        <li><a href="#reviews">游客评价</a></li>
+                        <li><a href="#about">关于我们</a></li>
+                        <li><a href="#contact">联系我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>热门景点</h3>
+                    <ul>
+                        <li><a href="#">舜帝陵</a></li>
+                        <li><a href="#">九嶷山大峡谷</a></li>
+                        <li><a href="#">仙子崖</a></li>
+                        <li><a href="#">九嶷山瀑布</a></li>
+                        <li><a href="#">苍龙岭</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>联系方式</h3>
+                    <p>地址：湖南省宁远县九嶷山风景区</p>
+                    <p>电话：+86 746 1234 5678</p>
+                    <p>邮箱：info@jiuyishan.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 九嶷山旅游小勇哥 版权所有
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const navItems = document.querySelectorAll('.slider-nav-item');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slider.style.transform = `translateX(-${n * 100}%)`;
+            navItems[currentSlide].classList.remove('active');
+            navItems[n].classList.add('active');
+            currentSlide = n;
+        }
+
+        function nextSlide() {
+            showSlide((currentSlide + 1) % slides.length);
+        }
+
+        navItems.forEach((item, index) => {
+            item.addEventListener('click', () => showSlide(index));
+        });
+
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html>
